@@ -13,7 +13,52 @@
 		CE0FF2B71DD1C337004A0608 /* OPTO_e_Catalogue.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CE0FF2B51DD1C337004A0608 /* OPTO_e_Catalogue.xcdatamodeld */; };
 		CE0FF2B91DD1C337004A0608 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE0FF2B81DD1C337004A0608 /* Assets.xcassets */; };
 		CE0FF2BC1DD1C337004A0608 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE0FF2BA1DD1C337004A0608 /* LaunchScreen.storyboard */; };
+		CE0FF2C51DD1C581004A0608 /* Catalog.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE0FF2C41DD1C581004A0608 /* Catalog.storyboard */; };
+		CE0FF2C71DD1C590004A0608 /* Orders.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE0FF2C61DD1C590004A0608 /* Orders.storyboard */; };
+		CE0FF2C91DD1C5C1004A0608 /* Contacts.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE0FF2C81DD1C5C1004A0608 /* Contacts.storyboard */; };
+		CE0FF2CB1DD1C5D6004A0608 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE0FF2CA1DD1C5D6004A0608 /* Home.storyboard */; };
+		CE0FF2CD1DD1C60F004A0608 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE0FF2CC1DD1C60F004A0608 /* Settings.storyboard */; };
+		CE0FF2D21DD1DDE9004A0608 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0FF2D11DD1DDE9004A0608 /* LoginViewController.swift */; };
+		CE0FF2D41DD1DEE8004A0608 /* ServerUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0FF2D31DD1DEE8004A0608 /* ServerUtilities.swift */; };
+		CE0FF2D71DD1DF7E004A0608 /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE0FF2D51DD1DF7E004A0608 /* Realm.framework */; };
+		CE0FF2D81DD1DF7E004A0608 /* Realm.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = CE0FF2D51DD1DF7E004A0608 /* Realm.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		CE0FF2D91DD1DF7E004A0608 /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE0FF2D61DD1DF7E004A0608 /* RealmSwift.framework */; };
+		CE0FF2DA1DD1DF7E004A0608 /* RealmSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = CE0FF2D61DD1DF7E004A0608 /* RealmSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		CE0FF2DD1DD1EF83004A0608 /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0FF2DC1DD1EF83004A0608 /* Database.swift */; };
+		CE0FF2DF1DD29D1F004A0608 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE0FF2DE1DD29D1F004A0608 /* Login.storyboard */; };
+		CE0FF2E11DD2BA61004A0608 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0FF2E01DD2BA61004A0608 /* SettingsViewController.swift */; };
+		CE61FD151DD978CF00840C22 /* CatalogueViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE61FD141DD978CF00840C22 /* CatalogueViewController.swift */; };
+		CE61FD171DDAA4CE00840C22 /* CatalogueCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE61FD161DDAA4CE00840C22 /* CatalogueCells.swift */; };
+		CEC0CA331DDBAF9D0026B703 /* ApplicationUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC0CA321DDBAF9D0026B703 /* ApplicationUtilities.swift */; };
+		CEC0CA351DDBAFF40026B703 /* GroupPopOverController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC0CA341DDBAFF40026B703 /* GroupPopOverController.swift */; };
+		CEC0CA371DDBB0300026B703 /* GroupPopOverCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC0CA361DDBB0300026B703 /* GroupPopOverCell.swift */; };
+		CEC0CA431DDCF9330026B703 /* CustomerPopOverController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC0CA421DDCF9330026B703 /* CustomerPopOverController.swift */; };
+		CEC0CA451DDCF9640026B703 /* CustomerPopOverCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC0CA441DDCF9640026B703 /* CustomerPopOverCell.swift */; };
+		CEC0CA471DDD48220026B703 /* ContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC0CA461DDD48220026B703 /* ContactViewController.swift */; };
+		CEC0CA491DDD490E0026B703 /* ContactCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC0CA481DDD490E0026B703 /* ContactCell.swift */; };
+		CEC0CA4B1DDE6F1F0026B703 /* ContactDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC0CA4A1DDE6F1F0026B703 /* ContactDetailsViewController.swift */; };
+		CEC0CA4D1DDE75E30026B703 /* PendingOrdersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC0CA4C1DDE75E30026B703 /* PendingOrdersViewController.swift */; };
+		CEC0CA511DDE7DD20026B703 /* PendingOdersCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC0CA501DDE7DD20026B703 /* PendingOdersCell.swift */; };
+		CEC0CA531DDE8D4F0026B703 /* PartListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC0CA521DDE8D4F0026B703 /* PartListViewController.swift */; };
+		CEC0CA551DDE8F650026B703 /* PartListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC0CA541DDE8F650026B703 /* PartListCell.swift */; };
+		CEC0CA571DDEC51F0026B703 /* PartListDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC0CA561DDEC51F0026B703 /* PartListDetailsViewController.swift */; };
+		CEC0CA5C1DE3BEED0026B703 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC0CA5B1DE3BEED0026B703 /* SwiftyJSON.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		CE0FF2DB1DD1DF7E004A0608 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				CE0FF2DA1DD1DF7E004A0608 /* RealmSwift.framework in Embed Frameworks */,
+				CE0FF2D81DD1DF7E004A0608 /* Realm.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		CE0FF2AB1DD1C337004A0608 /* OPTO e-Catalogue.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "OPTO e-Catalogue.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -24,6 +69,35 @@
 		CE0FF2B81DD1C337004A0608 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CE0FF2BB1DD1C337004A0608 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CE0FF2BD1DD1C337004A0608 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CE0FF2C31DD1C344004A0608 /* OPTO e-Catalogue.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "OPTO e-Catalogue.entitlements"; sourceTree = "<group>"; };
+		CE0FF2C41DD1C581004A0608 /* Catalog.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Catalog.storyboard; sourceTree = "<group>"; };
+		CE0FF2C61DD1C590004A0608 /* Orders.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Orders.storyboard; sourceTree = "<group>"; };
+		CE0FF2C81DD1C5C1004A0608 /* Contacts.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Contacts.storyboard; sourceTree = "<group>"; };
+		CE0FF2CA1DD1C5D6004A0608 /* Home.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
+		CE0FF2CC1DD1C60F004A0608 /* Settings.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
+		CE0FF2D11DD1DDE9004A0608 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		CE0FF2D31DD1DEE8004A0608 /* ServerUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerUtilities.swift; sourceTree = "<group>"; };
+		CE0FF2D51DD1DF7E004A0608 /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Realm.framework; sourceTree = "<group>"; };
+		CE0FF2D61DD1DF7E004A0608 /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = RealmSwift.framework; sourceTree = "<group>"; };
+		CE0FF2DC1DD1EF83004A0608 /* Database.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Database.swift; sourceTree = "<group>"; };
+		CE0FF2DE1DD29D1F004A0608 /* Login.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
+		CE0FF2E01DD2BA61004A0608 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		CE61FD141DD978CF00840C22 /* CatalogueViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CatalogueViewController.swift; sourceTree = "<group>"; };
+		CE61FD161DDAA4CE00840C22 /* CatalogueCells.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CatalogueCells.swift; sourceTree = "<group>"; };
+		CEC0CA321DDBAF9D0026B703 /* ApplicationUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplicationUtilities.swift; sourceTree = "<group>"; };
+		CEC0CA341DDBAFF40026B703 /* GroupPopOverController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupPopOverController.swift; sourceTree = "<group>"; };
+		CEC0CA361DDBB0300026B703 /* GroupPopOverCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupPopOverCell.swift; sourceTree = "<group>"; };
+		CEC0CA421DDCF9330026B703 /* CustomerPopOverController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomerPopOverController.swift; sourceTree = "<group>"; };
+		CEC0CA441DDCF9640026B703 /* CustomerPopOverCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomerPopOverCell.swift; sourceTree = "<group>"; };
+		CEC0CA461DDD48220026B703 /* ContactViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactViewController.swift; sourceTree = "<group>"; };
+		CEC0CA481DDD490E0026B703 /* ContactCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactCell.swift; sourceTree = "<group>"; };
+		CEC0CA4A1DDE6F1F0026B703 /* ContactDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactDetailsViewController.swift; sourceTree = "<group>"; };
+		CEC0CA4C1DDE75E30026B703 /* PendingOrdersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PendingOrdersViewController.swift; sourceTree = "<group>"; };
+		CEC0CA501DDE7DD20026B703 /* PendingOdersCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PendingOdersCell.swift; sourceTree = "<group>"; };
+		CEC0CA521DDE8D4F0026B703 /* PartListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PartListViewController.swift; sourceTree = "<group>"; };
+		CEC0CA541DDE8F650026B703 /* PartListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PartListCell.swift; sourceTree = "<group>"; };
+		CEC0CA561DDEC51F0026B703 /* PartListDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PartListDetailsViewController.swift; sourceTree = "<group>"; };
+		CEC0CA5B1DE3BEED0026B703 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,6 +105,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE0FF2D91DD1DF7E004A0608 /* RealmSwift.framework in Frameworks */,
+				CE0FF2D71DD1DF7E004A0608 /* Realm.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -40,6 +116,8 @@
 		CE0FF2A21DD1C337004A0608 = {
 			isa = PBXGroup;
 			children = (
+				CE0FF2D51DD1DF7E004A0608 /* Realm.framework */,
+				CE0FF2D61DD1DF7E004A0608 /* RealmSwift.framework */,
 				CE0FF2AD1DD1C337004A0608 /* OPTO e-Catalogue */,
 				CE0FF2AC1DD1C337004A0608 /* Products */,
 			);
@@ -56,15 +134,66 @@
 		CE0FF2AD1DD1C337004A0608 /* OPTO e-Catalogue */ = {
 			isa = PBXGroup;
 			children = (
+				CE0FF2D01DD1DDB7004A0608 /* View */,
+				CE0FF2CF1DD1DDB2004A0608 /* Model */,
+				CE0FF2CE1DD1DD94004A0608 /* Controller */,
+				CE0FF2C31DD1C344004A0608 /* OPTO e-Catalogue.entitlements */,
 				CE0FF2AE1DD1C337004A0608 /* AppDelegate.swift */,
 				CE0FF2B01DD1C337004A0608 /* ViewController.swift */,
-				CE0FF2B21DD1C337004A0608 /* Main.storyboard */,
 				CE0FF2B81DD1C337004A0608 /* Assets.xcassets */,
 				CE0FF2BA1DD1C337004A0608 /* LaunchScreen.storyboard */,
 				CE0FF2BD1DD1C337004A0608 /* Info.plist */,
 				CE0FF2B51DD1C337004A0608 /* OPTO_e_Catalogue.xcdatamodeld */,
+				CEC0CA5B1DE3BEED0026B703 /* SwiftyJSON.swift */,
 			);
 			path = "OPTO e-Catalogue";
+			sourceTree = "<group>";
+		};
+		CE0FF2CE1DD1DD94004A0608 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				CE0FF2D11DD1DDE9004A0608 /* LoginViewController.swift */,
+				CE0FF2E01DD2BA61004A0608 /* SettingsViewController.swift */,
+				CE61FD141DD978CF00840C22 /* CatalogueViewController.swift */,
+				CE61FD161DDAA4CE00840C22 /* CatalogueCells.swift */,
+				CEC0CA341DDBAFF40026B703 /* GroupPopOverController.swift */,
+				CEC0CA361DDBB0300026B703 /* GroupPopOverCell.swift */,
+				CEC0CA421DDCF9330026B703 /* CustomerPopOverController.swift */,
+				CEC0CA441DDCF9640026B703 /* CustomerPopOverCell.swift */,
+				CEC0CA461DDD48220026B703 /* ContactViewController.swift */,
+				CEC0CA481DDD490E0026B703 /* ContactCell.swift */,
+				CEC0CA4A1DDE6F1F0026B703 /* ContactDetailsViewController.swift */,
+				CEC0CA4C1DDE75E30026B703 /* PendingOrdersViewController.swift */,
+				CEC0CA501DDE7DD20026B703 /* PendingOdersCell.swift */,
+				CEC0CA521DDE8D4F0026B703 /* PartListViewController.swift */,
+				CEC0CA541DDE8F650026B703 /* PartListCell.swift */,
+				CEC0CA561DDEC51F0026B703 /* PartListDetailsViewController.swift */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		CE0FF2CF1DD1DDB2004A0608 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				CE0FF2D31DD1DEE8004A0608 /* ServerUtilities.swift */,
+				CE0FF2DC1DD1EF83004A0608 /* Database.swift */,
+				CEC0CA321DDBAF9D0026B703 /* ApplicationUtilities.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		CE0FF2D01DD1DDB7004A0608 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				CE0FF2B21DD1C337004A0608 /* Main.storyboard */,
+				CE0FF2C41DD1C581004A0608 /* Catalog.storyboard */,
+				CE0FF2C61DD1C590004A0608 /* Orders.storyboard */,
+				CE0FF2C81DD1C5C1004A0608 /* Contacts.storyboard */,
+				CE0FF2CA1DD1C5D6004A0608 /* Home.storyboard */,
+				CE0FF2CC1DD1C60F004A0608 /* Settings.storyboard */,
+				CE0FF2DE1DD29D1F004A0608 /* Login.storyboard */,
+			);
+			name = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -77,6 +206,7 @@
 				CE0FF2A71DD1C337004A0608 /* Sources */,
 				CE0FF2A81DD1C337004A0608 /* Frameworks */,
 				CE0FF2A91DD1C337004A0608 /* Resources */,
+				CE0FF2DB1DD1DF7E004A0608 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -99,8 +229,13 @@
 				TargetAttributes = {
 					CE0FF2AA1DD1C337004A0608 = {
 						CreatedOnToolsVersion = 8.0;
-						DevelopmentTeam = EZAD96A4YH;
+						DevelopmentTeam = 56WV9UDN42;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Keychain = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -127,9 +262,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE0FF2CB1DD1C5D6004A0608 /* Home.storyboard in Resources */,
+				CE0FF2C51DD1C581004A0608 /* Catalog.storyboard in Resources */,
 				CE0FF2BC1DD1C337004A0608 /* LaunchScreen.storyboard in Resources */,
+				CE0FF2CD1DD1C60F004A0608 /* Settings.storyboard in Resources */,
+				CE0FF2C71DD1C590004A0608 /* Orders.storyboard in Resources */,
+				CE0FF2C91DD1C5C1004A0608 /* Contacts.storyboard in Resources */,
 				CE0FF2B91DD1C337004A0608 /* Assets.xcassets in Resources */,
 				CE0FF2B41DD1C337004A0608 /* Main.storyboard in Resources */,
+				CE0FF2DF1DD29D1F004A0608 /* Login.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -140,9 +281,29 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE0FF2DD1DD1EF83004A0608 /* Database.swift in Sources */,
+				CEC0CA351DDBAFF40026B703 /* GroupPopOverController.swift in Sources */,
+				CEC0CA571DDEC51F0026B703 /* PartListDetailsViewController.swift in Sources */,
+				CE0FF2D21DD1DDE9004A0608 /* LoginViewController.swift in Sources */,
+				CEC0CA431DDCF9330026B703 /* CustomerPopOverController.swift in Sources */,
+				CEC0CA511DDE7DD20026B703 /* PendingOdersCell.swift in Sources */,
+				CE0FF2E11DD2BA61004A0608 /* SettingsViewController.swift in Sources */,
+				CEC0CA331DDBAF9D0026B703 /* ApplicationUtilities.swift in Sources */,
+				CEC0CA5C1DE3BEED0026B703 /* SwiftyJSON.swift in Sources */,
+				CEC0CA371DDBB0300026B703 /* GroupPopOverCell.swift in Sources */,
+				CE61FD171DDAA4CE00840C22 /* CatalogueCells.swift in Sources */,
+				CEC0CA491DDD490E0026B703 /* ContactCell.swift in Sources */,
+				CEC0CA551DDE8F650026B703 /* PartListCell.swift in Sources */,
+				CEC0CA4D1DDE75E30026B703 /* PendingOrdersViewController.swift in Sources */,
+				CEC0CA4B1DDE6F1F0026B703 /* ContactDetailsViewController.swift in Sources */,
 				CE0FF2B11DD1C337004A0608 /* ViewController.swift in Sources */,
+				CEC0CA531DDE8D4F0026B703 /* PartListViewController.swift in Sources */,
+				CEC0CA451DDCF9640026B703 /* CustomerPopOverCell.swift in Sources */,
+				CE61FD151DD978CF00840C22 /* CatalogueViewController.swift in Sources */,
 				CE0FF2AF1DD1C337004A0608 /* AppDelegate.swift in Sources */,
+				CE0FF2D41DD1DEE8004A0608 /* ServerUtilities.swift in Sources */,
 				CE0FF2B71DD1C337004A0608 /* OPTO_e_Catalogue.xcdatamodeld in Sources */,
+				CEC0CA471DDD48220026B703 /* ContactViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -265,8 +426,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = EZAD96A4YH;
+				CODE_SIGN_ENTITLEMENTS = "OPTO e-Catalogue/OPTO e-Catalogue.entitlements";
+				DEVELOPMENT_TEAM = 56WV9UDN42;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = "OPTO e-Catalogue/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.TedBinary.OPTO-e-Catalogue";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -278,8 +445,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = EZAD96A4YH;
+				CODE_SIGN_ENTITLEMENTS = "OPTO e-Catalogue/OPTO e-Catalogue.entitlements";
+				DEVELOPMENT_TEAM = 56WV9UDN42;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = "OPTO e-Catalogue/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.TedBinary.OPTO-e-Catalogue";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -306,6 +479,7 @@
 				CE0FF2C21DD1C337004A0608 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

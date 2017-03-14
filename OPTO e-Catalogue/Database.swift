@@ -12,12 +12,25 @@ import Foundation
 enum GroupType: String {
     case MAIN_GROUP = "maingroup"
     case SUB_GROUP = "subgroup"
+    case PRE_ORDER = "preorder"
+    case FAVOURITE = "favourite"
     case NONE = "all"
+}
+
+final class Favourite: Object {
+    dynamic var name = ""
+    dynamic var employee = ""
+    let materials = List<Material>()
+    
+    override static func primaryKey() -> String? {
+        return "name"
+    }
 }
 
 final class OPTOUser: Object {
     dynamic var employee = ""
     dynamic var password = ""
+    dynamic var identity = ""
     
     override static func primaryKey() -> String? {
         return "employee"
@@ -27,6 +40,7 @@ final class OPTOUser: Object {
 final class Employee: Object {
     dynamic var code = ""
     dynamic var name = ""
+    dynamic var role = ""
     
     override static func primaryKey() -> String? {
         return "code"
@@ -43,6 +57,8 @@ final class Material: Object {
     dynamic var groupCode: String?
     dynamic var subGroupCode: String?
     dynamic var employee = ""
+    dynamic var barcode = ""
+    dynamic var active = true
     
     override static func primaryKey() -> String? {
         return "code"
@@ -56,6 +72,10 @@ final class Contact: Object {
     dynamic var phone = ""
     dynamic var website = ""
     dynamic var employee = ""
+    
+    dynamic var discount_1 = ""
+    dynamic var discount_2 = ""
+    dynamic var discount_early = ""
     
     dynamic var postal_address_1 = ""
     dynamic var postal_address_2 = ""
@@ -75,6 +95,7 @@ final class Contact: Object {
         return "code"
     }
 }
+
 
 final class SalesOrder: Object {
     dynamic var code = ""
@@ -101,16 +122,19 @@ final class PendingOrder: Object {
     dynamic var part_code = ""
     dynamic var customer = ""
     dynamic var project = ""
-    let partList = List<Material>()
+    var partList = List<Material>()
     let aloc_type = ""  // Part Type
     dynamic var due_date_1 = "" // Due Date
     dynamic var ma = "" // Discount
     dynamic var sum_one = ""    // Total
     dynamic var tax_pro = ""    // Tax
-    dynamic var to_do = ""  // Desp
+    dynamic var to_do = ""  // Order Note
     dynamic var total_amount_one = ""   // Unit price
     dynamic var total_qty = ""  // Quantity
     dynamic var send = false
+    dynamic var opto_rcd = ""
+    dynamic var opto_rcd_timestamp = ""
+    dynamic var employee = ""
     
     override static func primaryKey() -> String? {
         return "code"
@@ -140,6 +164,7 @@ final class PendingOrder: Object {
         dictionary["to_do"] = to_dos
         dictionary["total_amount_one"] = total_amount_ones
         dictionary["total_qty"] = total_qtys
+        dictionary["employee"] = [employee]
         
         let json = JSON(dictionary)
         

@@ -26,10 +26,14 @@ class PartListDetailsViewController: UIViewController {
         if (delegate != nil) {
             delegate?.setPartListDetails(controller: self)
         }
+        quantity.keyboardType = UIKeyboardType.numberPad
+        unitprice.keyboardType = UIKeyboardType.numberPad
+        discount.keyboardType = UIKeyboardType.numberPad
+        tax.keyboardType = UIKeyboardType.numberPad
     }
     
-    @IBAction func goBackToList(_ sender: UIButton) {
-        self.performSegue(withIdentifier: "goBackToList", sender: self)
+    @IBAction func goBackToList(_ sender: UIBarButtonItem) {
+        self.performSegue(withIdentifier: "backToList", sender: self)
     }
     
     @IBAction func save() {
@@ -46,21 +50,32 @@ class PartListDetailsViewController: UIViewController {
             var _discount = ApplicationUtilities.splitString(input: order.ma)
             var _total = ApplicationUtilities.splitString(input: order.sum_one)
             
+            let diff = Int(_quantity[position])! - Int(quantity.text!)!
+            
             _duedate[position] = duedate.text!
             _unitprice[position] = unitprice.text!
             _quantity[position] = quantity.text!
             _tax[position] = tax.text!
             _discount[position] = discount.text!
-            _total[position] = total.text!
+            let totalprice = (Double(unitprice.text!)! * Double(quantity.text!)! * (100 - Double(discount.text!)!)) / 100
+            _total[position] = String(totalprice)
             
-            let newOrder = PendingOrder(value: order)
-            newOrder.due_date_1 = ApplicationUtilities.appendArray(input: _duedate)
-            newOrder.total_amount_one = ApplicationUtilities.appendArray(input: _unitprice)
-            newOrder.total_qty = ApplicationUtilities.appendArray(input: _quantity)
-            newOrder.tax_pro = ApplicationUtilities.appendArray(input: _tax)
-            newOrder.ma = ApplicationUtilities.appendArray(input: _discount)
-            newOrder.sum_one = ApplicationUtilities.appendArray(input: _total)
-            ServerUtilities.addPendingOrder(input: newOrder)
+            let stock = ServerUtilities.updateStockMaterial(partCode: order.partList[position].code, stock: Double(diff))
+            if (stock >= 0) {
+                let newOrder = PendingOrder(value: order)
+                newOrder.due_date_1 = ApplicationUtilities.appendArray(input: _duedate)
+                newOrder.total_amount_one = ApplicationUtilities.appendArray(input: _unitprice)
+                newOrder.total_qty = ApplicationUtilities.appendArray(input: _quantity)
+                newOrder.tax_pro = ApplicationUtilities.appendArray(input: _tax)
+                newOrder.ma = ApplicationUtilities.appendArray(input: _discount)
+                newOrder.sum_one = ApplicationUtilities.appendArray(input: _total)
+                ServerUtilities.addPendingOrder(input: newOrder)
+            } else {
+                let alert = UIAlertController(title: "Warning", message: "Current Stock is \(order.partList[position].stock)", preferredStyle: UIAlertControllerStyle.alert)
+                alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+                self.present(alert, animated: true)
+            }
+            load()
         }
     }
     

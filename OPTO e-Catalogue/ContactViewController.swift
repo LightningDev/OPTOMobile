@@ -21,20 +21,35 @@ class ContactViewController: UIViewController {
     var contacts = [Contact]()
     var numberOfItems = 0
     var delegate: ContactDelegate? = nil
-    
-    // Online - unstable
-    let checkOnline = false
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.contactView.delegate = self
         self.contactView.dataSource = self
+        //load()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
         load()
+    }
+    
+    @IBAction func refresh() {
+        load()
+    }
+    
+    @IBAction func unwindToContact(segue: UIStoryboardSegue) {
+        
     }
     
     func load() {
         contacts.removeAll()
-        contacts = ServerUtilities.getContactSorted()
+        if (!ApplicationUtilities.testing) {
+            let predicate = NSPredicate(format: "employee = %@", ApplicationUtilities.loginUser)
+            contacts = ServerUtilities.getContactSorted(predicate: predicate)
+        } else {
+            contacts = ServerUtilities.getContactSorted()
+        }
         numberOfItems = contacts.count
         sorted()
         self.contactView.reloadData()

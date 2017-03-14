@@ -11,4 +11,6 @@ import UIKit
 class PartListCell: UITableViewCell {
     @IBOutlet weak var partcode: UILabel!
     @IBOutlet weak var desc: UILabel!
+    @IBOutlet weak var price: UILabel!
+    @IBOutlet weak var quantity: UILabel!
 }

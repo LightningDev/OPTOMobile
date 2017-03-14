@@ -10,6 +10,7 @@ import UIKit
 
 class GroupPopOverController: UITableViewController {
     
+    var favourite = [Favourite]()
     var group = [Group]()
     var numberOfItems = 0
     var _delegate: CatalogueViewControllerDelegate? = nil
@@ -35,14 +36,25 @@ class GroupPopOverController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "GroupCells", for: indexPath) as! GroupPopOverCell
-        cell.groupName.text = group[indexPath.row].desc
+        if (ApplicationUtilities.CurrentGroup == .FAVOURITE) {
+            cell.groupName.text = favourite[indexPath.row].name
+        } else {
+            cell.groupName.text = group[indexPath.row].desc
+        }
         return cell
     }
     
     func load() {
+        favourite.removeAll()
         group.removeAll()
-        group = ServerUtilities.getGroup(type: ApplicationUtilities.CurrentGroup)
-        numberOfItems = group.count
+        if (ApplicationUtilities.CurrentGroup == .FAVOURITE) {
+            let predicate = NSPredicate(format: "employee = %@", ApplicationUtilities.loginUser)
+            favourite = ServerUtilities.getFavourite(predicate: predicate)
+            numberOfItems = favourite.count
+        } else {
+            group = ServerUtilities.getGroup(type: ApplicationUtilities.CurrentGroup)
+            numberOfItems = group.count
+        }
         self.tableView.reloadData()
     }
     

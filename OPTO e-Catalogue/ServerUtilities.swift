@@ -9,23 +9,28 @@
 import Foundation
 import RealmSwift
 import SystemConfiguration
+import Alamofire
 
 class ServerUtilities {
     
     static var syncUser: SyncUser? = nil
-    static var realmIP: String = "http://192.168.222.113:9080"
-    static var realmURL: String = "realm://192.168.222.113:9080/~/OPTO"
+    static var customerImagesURL: String = ""
+    static var optoIP: String = "101.187.132.13:8000"
+    static var realmIP: String = "199.229.252.219:9080"
+    static var realmURL: String = "realm://199.229.252.219:9080/~/diecast"
     static var realm: Realm? = nil
-    static var realmUsername = "admin@opto.com"
-    static var realmPassword = "opto"
+    static var realmUsername = "test@opto.com"
+    static var realmPassword = "1234"
     static var defaultDiscount: Double = 0.0
     static var defaultTax = 2
+    static var realmConfiguration: Realm.Configuration? = nil
+    static var deduplicationNotificationToken: NotificationToken!
+    static var token: SyncSession.ProgressNotificationToken?
     
     /// Internet connection status
     ///
     /// - returns: true if connected, otherwise false if no connection
     class func isConnectedToNetwork() -> Bool {
-        
         var zeroAddress = sockaddr_in()
         zeroAddress.sin_len = UInt8(MemoryLayout.size(ofValue: zeroAddress))
         zeroAddress.sin_family = sa_family_t(AF_INET)
@@ -44,7 +49,18 @@ class ServerUtilities {
         let needsConnection = (flags.rawValue & UInt32(kSCNetworkFlagsConnectionRequired)) != 0
         
         return (isReachable && !needsConnection)
-        
+    }
+    
+    class func notificationDownload() {
+        let session = SyncUser.current?.allSessions()[0]
+        self.token = session?.addProgressNotification(for: .download, mode: .reportIndefinitely) {
+            progress in
+            print("Downloading \(progress.fractionTransferred)")
+            if (progress.isTransferComplete) {
+                print("Complete")
+            }
+        }
+
     }
     
     /// Login to Realm
@@ -53,29 +69,50 @@ class ServerUtilities {
     /// - parameter password:          Realm password
     /// - parameter action:            Login actions
     /// - parameter completionHandler: callback function
-    class func login(username: String, password: String, action: AuthenticationActions, completionHandler: @escaping ()->()) {
-        let serverURL = NSURL(string: realmIP)!
-        let credential = Credential.usernamePassword(username: username, password: password, actions: [action])
-        SyncUser.authenticate(with: credential, server: serverURL as URL) { user, error in
-            if let user = user {
-                syncUser = user
-                let syncServerURL = URL(string: realmURL)!
-                let config = Realm.Configuration(syncConfiguration: (user, syncServerURL))
-                realm = try! Realm(configuration: config)
-            } else if error != nil {
-                
+    class func login(username: String, password: String, register: Bool, dispatch: DispatchGroup) {
+        let serverURL = URL(string: "http://\(realmIP)")!
+        let credential = SyncCredentials.usernamePassword(username: username, password: password, register: register)
+        dispatch.enter()
+        if (isConnectedToNetwork() && SyncUser.current == nil) {
+            SyncUser.logIn(with: credential, server: serverURL as URL) { user, error in
+                if let user = user {
+                    syncUser = user
+                    setupRealm(syncUser: user)
+                } else if error != nil {
+                    print(error)
+                }
+                dispatch.leave()
             }
-            completionHandler()
+        } else {
+            setupRealm(syncUser: (SyncUser.current)!)
+            dispatch.leave()
         }
     }
     
-    class func loginOffline(username: String, password: String) -> Bool{
-        //        let user = ServerUtilities.getOfflineUser(username: username, password: password)
-        //        if (user.username != "") {
-        //            realm = try! Realm()
-        //            return true
-        //        }
-        return false
+    class func setupRealmWhenHaveInternet() {
+        
+    }
+    
+    class func setDefaultRealmConfigurationWithUser(user: SyncUser, serverURL: URL) {
+        realmConfiguration = Realm.Configuration(syncConfiguration: SyncConfiguration(user: user, realmURL: serverURL))
+    }
+    
+    class func logout() {
+        if (syncUser != nil) {
+            syncUser?.logOut()
+        }
+    }
+    
+    class func logoutAll() {
+        for person in SyncUser.all {
+            person.value.logOut()
+        }
+    }
+    
+    class func setupRealm(syncUser: SyncUser) {
+        self.syncUser = syncUser
+        let syncServerURL = URL(string: "realm://\(realmIP)/~/diecast")!
+        setDefaultRealmConfigurationWithUser(user: syncUser, serverURL: syncServerURL)
     }
     
     class func saveUser(user: OPTOUser) {
@@ -99,17 +136,37 @@ class ServerUtilities {
         }
     }
     
-    class func loginLocal(employee: String, password: String) -> Bool{
-        let predicate = NSPredicate(format: "employee = %@ AND password = %@", employee, password)
+    class func getOPTOUSer() -> [OPTOUser]{
         if (realm != nil || isConnectedToNetwork()) {
-            let user = realm?.objects(OPTOUser.self).filter(predicate)
-            if ((user?.count)! > 0) {
-                return true
+            if let list = realm?.objects(OPTOUser.self) {
+                return Array(list)
             }
+            return [OPTOUser]()
         } else {
             let _realm = try! Realm()
-            let user = _realm.objects(OPTOUser.self).filter(predicate)
-            if (user.count > 0) {
+            let list = _realm.objects(OPTOUser.self)
+            return Array(list)
+        }
+    }
+    
+    class func getOPTOUSer(predicate: NSPredicate) -> [OPTOUser]{
+        if (realm != nil || isConnectedToNetwork()) {
+            if let list = realm?.objects(OPTOUser.self).filter(predicate) {
+                return Array(list)
+            }
+            return [OPTOUser]()
+        } else {
+            let _realm = try! Realm()
+            let list = _realm.objects(OPTOUser.self).filter(predicate)
+            return Array(list)
+        }
+    }
+    
+    class func loginLocal(employee: String, password: String) -> Bool{
+        let predicate = NSPredicate(format: "employee = %@ AND password = %@", employee, password)
+        if (realm != nil && !(realm?.isEmpty)!) {
+            let user = ServerUtilities.realm?.objects(OPTOUser.self).filter(predicate)
+            if ((user?.count)! > 0) {
                 return true
             }
         }
@@ -134,6 +191,7 @@ class ServerUtilities {
     class func getMaterial(predicate: NSPredicate) -> [Material] {
         if (realm != nil || isConnectedToNetwork()) {
             if let list = realm?.objects(Material.self).filter(predicate) {
+                //print(list.count)
                 return Array(list)
             }
             return [Material]()
@@ -149,7 +207,7 @@ class ServerUtilities {
     class func getMaterial(group: String, type: GroupType) -> [Material] {
         switch (type) {
         case .MAIN_GROUP:
-            let predicate = NSPredicate(format: "groupCode = %@", group)
+            let predicate = NSPredicate(format: "groupCode = %@ AND stock > 0", group)
             if (realm != nil || isConnectedToNetwork()) {
                 if let list = realm?.objects(Material.self).filter(predicate) {
                     return Array(list)
@@ -160,7 +218,7 @@ class ServerUtilities {
                 return Array(list)
             }
         case .SUB_GROUP:
-            let predicate = NSPredicate(format: "subGroupCode = %@", group)
+            let predicate = NSPredicate(format: "subGroupCode = %@ AND stock > 0", group)
             if (realm != nil || isConnectedToNetwork()) {
                 if let list = realm?.objects(Material.self).filter(predicate) {
                     return Array(list)
@@ -219,6 +277,19 @@ class ServerUtilities {
     class func copyMaterial(material: Material) -> Material {
         let newMaterial = Material(value: material)
         return newMaterial
+    }
+    
+    class func updateStockMaterial(partCode: String, stock: Double) -> Int{
+        let predicate = NSPredicate(format: "code = %@", partCode)
+        let material = getMaterial(predicate: predicate).first
+        let stock = (material?.stock)! + stock
+        if (stock >= 0) {
+            try! realm?.write {
+                let stock = (material?.stock)! + stock
+                material?.stock = stock
+            }
+        }
+        return Int(stock)
     }
     
     /// Get Group
@@ -291,6 +362,20 @@ class ServerUtilities {
         return [Contact]()
     }
     
+    /// Get Contact
+    class func getContact(predicate: NSPredicate) -> [Contact] {
+        if (realm != nil || isConnectedToNetwork()) {
+            if let list = realm?.objects(Contact.self).filter(predicate) {
+                return Array(list)
+            }
+            return [Contact]()
+        } else {
+            let _realm = try! Realm()
+            let list = _realm.objects(Contact.self).filter(predicate)
+            return Array(list)
+        }
+    }
+    
     class func getContactSorted() -> [Contact] {
         if (realm != nil || isConnectedToNetwork()) {
             if let list = realm?.objects(Contact.self).sorted(byProperty: "name") {
@@ -302,6 +387,32 @@ class ServerUtilities {
             return Array(list)
         }
         return [Contact]()
+    }
+    
+    class func getContactSorted(predicate: NSPredicate) -> [Contact] {
+        if (realm != nil || isConnectedToNetwork()) {
+            if let list = realm?.objects(Contact.self).filter(predicate).sorted(byProperty: "name") {
+                return Array(list)
+            }
+        } else {
+            let _realm = try! Realm()
+            let list = _realm.objects(Contact.self).filter(predicate).sorted(byProperty: "name")
+            return Array(list)
+        }
+        return [Contact]()
+    }
+    
+    class func addContact(contact: Contact) {
+        if (realm != nil || isConnectedToNetwork()) {
+            try! realm?.write {
+                realm?.add(contact, update: true)
+            }
+        } else {
+            let _realm = try! Realm()
+            try! _realm.write {
+                _realm.add(contact, update: true)
+            }
+        }
     }
     
     /// Sync Contact
@@ -381,7 +492,7 @@ class ServerUtilities {
         }
         return [PendingOrder]()
     }
-
+    
     class func getPendingOrderSorted(ascending: Bool) -> [PendingOrder] {
         if (realm != nil || isConnectedToNetwork()) {
             if let list = realm?.objects(PendingOrder.self) {
@@ -404,6 +515,88 @@ class ServerUtilities {
             let _realm = try! Realm()
             try! _realm.write {
                 _realm.add(input, update: true)
+            }
+        }
+    }
+    
+    class func sendPendingOrder(input: PendingOrder, completionHandler: @escaping ()->()) {
+        let myNSURL = URL(string: "http://\(optoIP)" + "/api/salesorder/\(input.code)")
+        var myRequest = URLRequest(url: myNSURL!)
+        myRequest.httpMethod = "POST"
+        let loginString =  NSString(format: "%@:%@", "OPTO", "opto")
+        let loginData: Data = loginString.data(using: String.Encoding.utf8.rawValue)!
+        let base64LoginString = loginData.base64EncodedString(options: NSData.Base64EncodingOptions())
+        myRequest.httpBody = try! input.getJSON().rawData()
+        myRequest.setValue("Basic \(base64LoginString)", forHTTPHeaderField: "Authorization")
+        Alamofire.request(myRequest).responseJSON { response in
+            if (response.result.isSuccess) {
+                let json = JSON(data: response.data!)
+                let _input = PendingOrder(value: input)
+                _input.opto_rcd = json["code"].string!
+                _input.opto_rcd_timestamp = String(describing: NSDate())
+                addPendingOrder(input: _input)
+            }
+            completionHandler()
+        }
+    }
+    
+    class func deleteOrder(pending: PendingOrder) {
+        if (realm != nil || isConnectedToNetwork()) {
+            try! realm?.write {
+                realm?.delete(pending)
+            }
+        } else {
+            let _realm = try! Realm()
+            try! _realm.write {
+                _realm.delete(pending)
+            }
+        }
+    }
+    
+    class func deleteItem(inPendingOrder: PendingOrder, partcode: String) {
+        
+        var partlist = ApplicationUtilities.splitString(input: inPendingOrder.part_code)
+        var duedate = ApplicationUtilities.splitString(input: inPendingOrder.due_date_1)
+        var unitprice = ApplicationUtilities.splitString(input: inPendingOrder.total_amount_one)
+        var quantity = ApplicationUtilities.splitString(input: inPendingOrder.total_qty)
+        var tax = ApplicationUtilities.splitString(input: inPendingOrder.tax_pro)
+        var discount = ApplicationUtilities.splitString(input: inPendingOrder.ma)
+        var total = ApplicationUtilities.splitString(input: inPendingOrder.sum_one)
+        
+        let index = partlist.index(of: partcode)
+        partlist.remove(at: index!)
+        duedate.remove(at: index!)
+        unitprice.remove(at: index!)
+        quantity.remove(at: index!)
+        tax.remove(at: index!)
+        discount.remove(at: index!)
+        total.remove(at: index!)
+        
+        let parts = ApplicationUtilities.appendArray(input: partlist)
+        let date = ApplicationUtilities.appendArray(input: duedate)
+        let price = ApplicationUtilities.appendArray(input: unitprice)
+        let qty = ApplicationUtilities.appendArray(input: quantity)
+        let taxes = ApplicationUtilities.appendArray(input: tax)
+        let dis = ApplicationUtilities.appendArray(input: discount)
+        let tot = ApplicationUtilities.appendArray(input: total)
+        
+        inPendingOrder.part_code = parts
+        inPendingOrder.due_date_1 = date
+        inPendingOrder.total_amount_one = price
+        inPendingOrder.total_qty = qty
+        inPendingOrder.tax_pro = taxes
+        inPendingOrder.ma = dis
+        inPendingOrder.sum_one = tot
+        inPendingOrder.partList.remove(at: index!)
+        
+        if (realm != nil || isConnectedToNetwork()) {
+            try! realm?.write {
+                realm?.add(inPendingOrder, update: true)
+            }
+        } else {
+            let _realm = try! Realm()
+            try! _realm.write {
+                _realm.add(inPendingOrder, update: true)
             }
         }
     }
@@ -436,10 +629,57 @@ class ServerUtilities {
         return newOrder
     }
     
-    class func getImages() {
-        let material = getMaterial()
-        for i in 0..<material.count {
-            
+    class func addFavourite(input: Material) {
+        if (realm != nil || isConnectedToNetwork()) {
+            try! realm?.write {
+                realm?.add(input, update: true)
+            }
+        } else {
+            let _realm = try! Realm()
+            try! _realm.write {
+                _realm.add(input, update: true)
+            }
+        }
+    }
+    
+    /// Get Favourite
+    class func getFavourite() -> [Favourite] {
+        if (realm != nil || isConnectedToNetwork()) {
+            if let list = realm?.objects(Favourite.self) {
+                return Array(list)
+            }
+            return [Favourite]()
+        } else {
+            let _realm = try! Realm()
+            let list = _realm.objects(Favourite.self)
+            return Array(list)
+        }
+    }
+    
+    class func getFavourite(predicate: NSPredicate) -> [Favourite] {
+        if (realm != nil || isConnectedToNetwork()) {
+            if let list = realm?.objects(Favourite.self).filter(predicate) {
+                return Array(list)
+            }
+            return [Favourite]()
+        } else {
+            let _realm = try! Realm()
+            let list = _realm.objects(Favourite.self).filter(predicate)
+            return Array(list)
+        }
+    }
+    
+    /// Save Favourite
+    class func saveFavourite(input: Favourite) {
+        if (realm != nil || isConnectedToNetwork()) {
+            try! realm?.write {
+                realm?.add(input, update: true)
+            }
+        } else {
+            let _realm = try! Realm()
+            try! _realm.write {
+                _realm.add(input, update: true)
+            }
         }
     }
 }

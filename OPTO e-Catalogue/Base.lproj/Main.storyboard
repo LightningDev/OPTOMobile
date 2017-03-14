@@ -1,14 +1,14 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="sLh-Xt-4Cb">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16B2657" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="sLh-Xt-4Cb">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Tab Bar Controller-->
+        <!--Main Tabbar Controller-->
         <scene sceneID="Ndq-dd-KVM">
             <objects>
-                <tabBarController storyboardIdentifier="MenuTabBarController" id="sLh-Xt-4Cb" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="MenuTabBarController" id="sLh-Xt-4Cb" customClass="MainTabbarController" customModule="OPTO_e_Catalogue" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" id="bEO-7d-WUe">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -19,7 +19,7 @@
                         <segue destination="MdZ-fa-2y2" kind="relationship" relationship="viewControllers" id="ydh-rN-oDb"/>
                         <segue destination="aI5-dl-14c" kind="relationship" relationship="viewControllers" id="COZ-pX-oa7"/>
                         <segue destination="IZg-bX-X8l" kind="relationship" relationship="viewControllers" id="DHb-hn-VnE"/>
-                        <segue destination="aCM-pn-Mre" kind="relationship" relationship="viewControllers" id="jep-Hh-j8m"/>
+                        <segue destination="T74-Ak-510" kind="relationship" relationship="viewControllers" id="mVx-KQ-Ut5"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AK0-5G-nyk" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -66,18 +66,15 @@
             </objects>
             <point key="canvasLocation" x="-3650" y="-827"/>
         </scene>
-        <!--Settings-->
-        <scene sceneID="FfS-Ac-Wnp">
+        <!--POS-->
+        <scene sceneID="eCw-8x-cOA">
             <objects>
-                <viewControllerPlaceholder storyboardName="Settings" id="aCM-pn-Mre" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Settings" image="Settings-30" id="yHO-Lq-266"/>
+                <viewControllerPlaceholder storyboardName="POS" id="T74-Ak-510" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="Qsn-ue-VlD"/>
                 </viewControllerPlaceholder>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="TVt-bb-jUN" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2Ke-om-1Hf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-3650" y="-670"/>
+            <point key="canvasLocation" x="-3655" y="-729"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="Settings-30" width="30" height="30"/>
-    </resources>
 </document>

@@ -23,7 +23,14 @@ class ContactDetailsViewController: UIViewController {
     var contact = Contact()
     
     @IBAction func setContactDefault(_ sender: UIBarButtonItem) {
-        ApplicationUtilities.DefaultUser = contact.name
+        ApplicationUtilities.DefaultUser = contact.code
+        let alert = UIAlertController(title: "Customer Selection", message: "You have select \(contact.name) as a default customer.", preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.cancel, handler: nil))
+        self.present(alert, animated: true)
+    }
+    
+    @IBAction func showHistory(_ sender: UIBarButtonItem) {
+        self.performSegue(withIdentifier: "segueToHistory", sender: nil)
     }
     
     override func viewDidLoad() {
@@ -35,6 +42,16 @@ class ContactDetailsViewController: UIViewController {
         contactView?.delegate = self
     }
     
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if (segue.identifier == "segueToHistory") {
+            if let destination = segue.destination as? UINavigationController {
+                let predicate = NSPredicate(format: "customer = '\(contactCode.text!)'")
+                let history = destination.topViewController as! HistoryViewController
+                history.orders = ServerUtilities.getPendingOrder(predicate: predicate)
+            }
+        }
+    }
 }
 
 extension ContactDetailsViewController: ContactDelegate {

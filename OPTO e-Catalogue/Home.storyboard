@@ -1,14 +1,23 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="ZSB-Wb-oaP">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16B2657" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="ZSB-Wb-oaP">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--Login-->
+        <scene sceneID="gYu-ZT-j33">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Login" id="VQx-1v-AgJ" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ygI-4E-3a6" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2822" y="-2209"/>
+        </scene>
         <!--Home-->
         <scene sceneID="Ork-hy-Cz5">
             <objects>
-                <viewController storyboardIdentifier="MainMenu" title="Home" id="Hei-vA-d8K" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MainMenu" title="Home" id="Hei-vA-d8K" customClass="HomeViewController" customModule="OPTO_e_Catalogue" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="9Bt-0k-YCk"/>
                         <viewControllerLayoutGuide type="bottom" id="PxB-aI-d0G"/>
@@ -18,11 +27,39 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Diecast-splash screen" translatesAutoresizingMaskIntoConstraints="NO" id="djN-Sn-j6N"/>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ipD-Ac-M6c">
+                                <subviews>
+                                    <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="azY-uR-Rb3">
+                                        <frame key="frameInset" minX="8" minY="8" width="37" height="61"/>
+                                        <color key="color" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </activityIndicatorView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Downloading" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TBX-Ns-8bI">
+                                        <frame key="frameInset" minX="53" minY="8" width="195" height="61"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="18"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="0.2666666667" green="0.2666666667" blue="0.2666666667" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstItem="azY-uR-Rb3" firstAttribute="top" secondItem="ipD-Ac-M6c" secondAttribute="top" constant="8" id="HSj-SQ-4fo"/>
+                                    <constraint firstAttribute="trailing" secondItem="TBX-Ns-8bI" secondAttribute="trailing" constant="8" id="M9b-98-D4Y"/>
+                                    <constraint firstAttribute="bottom" secondItem="azY-uR-Rb3" secondAttribute="bottom" constant="8" id="Rdk-Ac-HcK"/>
+                                    <constraint firstAttribute="bottom" secondItem="TBX-Ns-8bI" secondAttribute="bottom" constant="8" id="ahS-uz-lwg"/>
+                                    <constraint firstItem="azY-uR-Rb3" firstAttribute="leading" secondItem="ipD-Ac-M6c" secondAttribute="leading" constant="8" id="kpo-my-Nm1"/>
+                                    <constraint firstItem="TBX-Ns-8bI" firstAttribute="leading" secondItem="azY-uR-Rb3" secondAttribute="trailing" constant="8" id="qkl-rJ-em3"/>
+                                    <constraint firstItem="TBX-Ns-8bI" firstAttribute="top" secondItem="ipD-Ac-M6c" secondAttribute="top" constant="8" id="quE-hR-TLe"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="djN-Sn-j6N" firstAttribute="leading" secondItem="jOq-7h-RIh" secondAttribute="leading" id="5jE-N0-cfW"/>
+                            <constraint firstItem="ipD-Ac-M6c" firstAttribute="height" secondItem="jOq-7h-RIh" secondAttribute="height" multiplier="0.1" id="9Bt-YY-lha"/>
+                            <constraint firstItem="ipD-Ac-M6c" firstAttribute="centerX" secondItem="jOq-7h-RIh" secondAttribute="centerX" id="IcJ-MU-wR6"/>
                             <constraint firstItem="djN-Sn-j6N" firstAttribute="top" secondItem="9Bt-0k-YCk" secondAttribute="bottom" id="OF4-PT-MkH"/>
+                            <constraint firstItem="ipD-Ac-M6c" firstAttribute="centerY" secondItem="jOq-7h-RIh" secondAttribute="centerY" id="OvS-Uc-18e"/>
+                            <constraint firstItem="ipD-Ac-M6c" firstAttribute="width" secondItem="jOq-7h-RIh" secondAttribute="width" multiplier="0.25" id="PK4-6g-3DR"/>
                             <constraint firstItem="PxB-aI-d0G" firstAttribute="top" secondItem="djN-Sn-j6N" secondAttribute="bottom" id="m2P-9f-Wdj"/>
                             <constraint firstAttribute="trailing" secondItem="djN-Sn-j6N" secondAttribute="trailing" id="v0L-rb-9pe"/>
                         </constraints>
@@ -30,8 +67,24 @@
                     <navigationItem key="navigationItem" title="Diecast Distributors Australia" id="K8k-OT-9WS">
                         <barButtonItem key="leftBarButtonItem" title="Logout" id="Gb3-cZ-leq">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <action selector="logoutWithSender:" destination="Hei-vA-d8K" id="tp2-7F-OwK"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Sync Images" id="gep-07-8e5">
+                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <connections>
+                                <action selector="syncWithSender:" destination="Hei-vA-d8K" id="Hdb-t2-Agn"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="downloadLabel" destination="TBX-Ns-8bI" id="laL-Mv-hma"/>
+                        <outlet property="downloadView" destination="ipD-Ac-M6c" id="EWp-ZO-Bd5"/>
+                        <outlet property="loadingActivity" destination="azY-uR-Rb3" id="Mbx-ub-X87"/>
+                        <outlet property="syncButton" destination="gep-07-8e5" id="bjt-jJ-FdR"/>
+                        <segue destination="VQx-1v-AgJ" kind="showDetail" identifier="segueToLogin" id="7HC-lN-xuG"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5cV-xf-7kQ" sceneMemberID="firstResponder"/>
             </objects>
@@ -46,7 +99,7 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="O7P-Ml-M6V">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="barTintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="barTintColor" red="0.082865046969999995" green="0.40506101080000001" blue="0.78075428300000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <textAttributes key="titleTextAttributes">
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </textAttributes>
